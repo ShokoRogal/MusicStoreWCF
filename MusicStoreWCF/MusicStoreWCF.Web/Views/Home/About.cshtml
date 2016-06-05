@@ -1,0 +1,63 @@
+﻿@model List<MusicStoreWCF.Web.Models.Category>
+
+@{
+    ViewBag.Title = "About";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<p>Use this area to provide additional information.</p>
+
+
+<div class="row">
+    @foreach (var category in Model)
+    {
+        <div id="grid_id_@category.CategoryId" class="col-md-4">
+            <div class="box box-success box-solid category-box" id="@category.CategoryId">
+                <div class="box-header with-border">
+                    <h3 id="header_id_@category.CategoryId" class="box-title">@category.Name</h3>
+                    <button class="btn btn-box-tool btn-edit-item" data-toggle="modal" data-target="#myModalEdit"><i class="fa fa-edit"></i></button>
+                    <button class="btn btn-box-tool btn-remove-item" data-toggle="modal" data-target="#myModalRemove"><i class="glyphicon glyphicon-remove"></i></button>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool btn-add-item" data-toggle="modal" data-target="#myModalAddLink"><i class="fa fa-plus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table class="table table-bordered" id="table_id_@category.CategoryId">
+                        @foreach (var link in category.Products)
+                        {
+                            <tr id="link_id_@link.ProductId">
+                                <td class="linkName">@link.Name</td>
+                                <td class="linkContent"><a class="link_category" href="@link.Description">@link.Price</a></td>
+                                <td><button type="button" class="btn btn-box-tool btn-edit-link" data-toggle="modal" data-target="#myModalEditLink"><i class="fa fa-edit"></i></button></td>
+                                <td><button type="button" class="btn btn-box-tool btn-remove-link" data-toggle="modal" data-target="#myModalRemoveLink"><i class="glyphicon glyphicon-remove"></i></button></td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+
+<!--<div>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Category</th>
+        </tr>
+
+        foreach (var product in Model)
+        {
+            <tr>
+                <th>product.Name</th>
+                <th>product.Description</th>
+                <th>product.Price</th>
+            </tr>
+        }
+    </table>
+</div>-->

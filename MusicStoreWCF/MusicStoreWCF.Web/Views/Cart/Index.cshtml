@@ -1,0 +1,47 @@
+﻿@model MusicStoreWCF.Web.Models.CartViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    #cartTable td {
+        vertical-align: middle;
+    }
+</style>
+
+<h2>Twoj Koszyk</h2>
+<table id="cartTable" class="table">
+    <thead>
+        <tr>
+            <th>Ilosc</th>
+            <th>Produkt</th>
+            <th class="text-right">Cena</th>
+            <th class="text-right">Wartosc</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cartItem in Model.CartItems)
+        {
+            <tr>
+                <td class="text-center">@cartItem.Quantity</td>
+                <td class="text-left">@cartItem.Product.Name</td>
+                <td class="text-right">@cartItem.Product.Price.ToString("c")</td>
+                <td class="text-right">@String.Format("{0:0.##}", cartItem.TotalPrice) zł</td>
+                <td><a class="btn btn-sm btn-warning" href="@Url.Action("RemoveFromCart", "Cart", new { id = cartItem.Product.ProductId })">Usuń z koszyka</a></td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Razem:</td>
+            <td class="text-right">@String.Format("{0:0.##}", Model.TotalPrice)</td>
+        </tr>
+    </tfoot>
+</table>
+
+<div class="text-center">
+    <a class="btn btn-primary" href="@Url.Action("Index", "Home")">Kontynuj zakupy</a>
+   <!-- @Html.ActionLink("Złóż zamówienie", "Checkout", null, new { @class = "btn btn-primary" })-->
+</div>
